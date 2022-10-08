@@ -9,6 +9,8 @@ import {
 } from "../../utilities/firebase/firebase.utillities";
 import { async } from "@firebase/util";
 
+import SignUpForm from "../../component/sign-up-form/sign-up-form.component";
+
 const SignIn = () => {
   // useEffect(() => {
   //   (async () => {
@@ -33,6 +35,7 @@ const SignIn = () => {
       {/* <button onClick={signInWithGoogleRedirect}>
         sign in with Google redirect
       </button> */}
+      <SignUpForm />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
-  ProviderId,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -39,7 +39,12 @@ export const signInWithGoogleRedirect = () =>
 // storing and modifying database
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async function (userAuth) {
+export const createUserDocumentFromAuth = async function (
+  userAuth,
+  additionalInformation = {}
+) {
+  if (!userAuth) return;
+
   const userDocRef = doc(db, "users", userAuth.uid);
 
   const userSnapshop = await getDoc(userDocRef);
@@ -55,14 +60,19 @@ export const createUserDocumentFromAuth = async function (userAuth) {
         displayName,
         email,
         createAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log("error occured,", error);
     }
   }
 
-  // if user data exits
+  // if user data exits, return userDocRef
   return userDocRef;
+};
 
-  // return userDocRef
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
