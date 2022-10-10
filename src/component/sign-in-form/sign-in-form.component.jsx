@@ -9,9 +9,7 @@ import {
 
 import { async } from "@firebase/util";
 
-import { useState, useContext } from "react";
-
-import { UserContext } from "../../contexts/user.context";
+import { useState } from "react";
 
 import "./sign-in-form.styles.scss";
 
@@ -24,15 +22,11 @@ const SignInForm = (e) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-  const { setCurrentUser } = useContext(UserContext);
-
   const resetFormField = () => {
     setFormFields(defaultFormFields);
   };
   const signInWithGoogle = async (e) => {
-    const { user } = await signInWithGooglePopup();
-    setCurrentUser(user);
-    createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   const handleChange = (e) => {
@@ -45,7 +39,6 @@ const SignInForm = (e) => {
 
     try {
       const { user } = await SignInAuthEmailAndpassword(email, password);
-      setCurrentUser(user);
       resetFormField();
     } catch (error) {
       switch (error.code) {
