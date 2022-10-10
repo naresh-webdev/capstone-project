@@ -9,7 +9,9 @@ import {
 
 import { async } from "@firebase/util";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { UserContext } from "../../contexts/user.context";
 
 import "./sign-in-form.styles.scss";
 
@@ -22,14 +24,15 @@ const SignInForm = (e) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const { setCurrentUser } = useContext(UserContext);
+
   const resetFormField = () => {
     setFormFields(defaultFormFields);
   };
   const signInWithGoogle = async (e) => {
-    e.preventDefault();
     const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
-    console.log(user);
+    setCurrentUser(user);
+    createUserDocumentFromAuth(user);
   };
 
   const handleChange = (e) => {
@@ -41,8 +44,9 @@ const SignInForm = (e) => {
     event.preventDefault();
 
     try {
-      const response = await SignInAuthEmailAndpassword(email, password);
-      console.log(response);
+      const { user } = await SignInAuthEmailAndpassword(email, password);
+      setCurrentUser(user);
+      resetFormField();
     } catch (error) {
       switch (error.code) {
         case "auth/user-not-found":
