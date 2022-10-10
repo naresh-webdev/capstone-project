@@ -29,6 +29,7 @@ const SignInForm = (e) => {
     e.preventDefault();
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
+    console.log(user);
   };
 
   const handleChange = (e) => {
@@ -43,7 +44,16 @@ const SignInForm = (e) => {
       const response = await SignInAuthEmailAndpassword(email, password);
       console.log(response);
     } catch (error) {
-      alert(error.code);
+      switch (error.code) {
+        case "auth/user-not-found":
+          alert("no user found with given email");
+          break;
+        case "auth/user-not-found":
+          alert("incorrect password for email");
+          break;
+        default:
+          console.log(error);
+      }
     }
   };
 
@@ -73,7 +83,11 @@ const SignInForm = (e) => {
 
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button onClick={signInWithGoogle} buttonType={"google"}>
+          <Button
+            type="button"
+            onClick={signInWithGoogle}
+            buttonType={"google"}
+          >
             google sign in
           </Button>
         </div>
