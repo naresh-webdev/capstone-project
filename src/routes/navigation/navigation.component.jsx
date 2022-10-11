@@ -2,6 +2,7 @@ import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import CartIcon from "../../component/cart-icon/cart-icon.component";
+import CartDropdown from "../../component/cart-dropdown/cart-dropdown.components";
 
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
 import { UserContext } from "../../contexts/user.context";
@@ -18,7 +19,6 @@ const Navigation = () => {
         <Link to={"/"} className="logo-container">
           <CrownLogo className="logo" />
         </Link>
-
         <div className="nav-links-container">
           <Link className="nav-link" to={"/shop"}>
             SHOP
@@ -35,6 +35,7 @@ const Navigation = () => {
 
           <CartIcon />
         </div>
+        <CartDropdown />
       </div>
       <Outlet />
     </Fragment>
