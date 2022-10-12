@@ -1,13 +1,17 @@
 import { useContext, useEffect } from "react";
 import { CartContext } from "../../contexts/cart-dropdown.context";
 
+import "./checkout.styles.scss";
+
 const Checkout = () => {
   const {
     isCartOpen,
     setIsCartOpen,
     CartItems,
     reduceCartItem,
-    increaseCartItem,
+    totalPrice,
+    addItemToCart,
+    removeItemToCart,
   } = useContext(CartContext);
 
   useEffect(() => {
@@ -23,7 +27,7 @@ const Checkout = () => {
           <p>
             <span
               onClick={() => {
-                reduceCartItem(item);
+                removeItemToCart(item);
               }}
             >
               &#8592;
@@ -31,17 +35,19 @@ const Checkout = () => {
             {item.quantity}
             <span
               onClick={() => {
-                increaseCartItem(item);
+                addItemToCart(item);
               }}
             >
               {" "}
               &#8594;{" "}
             </span>
           </p>
-          <p>{item.price}</p>
           <p>x</p>
+          <p>{item.price}</p>
         </div>
       ))}
+
+      <p>{totalPrice}</p>
     </div>
   );
 };
