@@ -8,7 +8,6 @@ const Checkout = () => {
     isCartOpen,
     setIsCartOpen,
     CartItems,
-    reduceCartItem,
     totalPrice,
     addItemToCart,
     removeItemToCart,
@@ -19,35 +18,38 @@ const Checkout = () => {
   }, []);
 
   return (
-    <div>
-      <h1>cart page</h1>
+    <div className="checkout-container">
+      <div className="checkout-header">
+        <div className="header-block">
+          <span>Product</span>
+        </div>
+        <div className="header-block">
+          <span>Description</span>
+        </div>
+        <div className="header-block">
+          <span>Quantity</span>
+        </div>
+        <div className="header-block">
+          <span>Price</span>
+        </div>
+        <div className="header-block">
+          <span>Remove</span>
+        </div>
+      </div>
       {CartItems.map((item) => (
         <div key={item.id}>
           <img src={item.imageUrl} alt="imageUrl" />;<p>{item.name}</p>
           <p>
-            <span
-              onClick={() => {
-                removeItemToCart(item);
-              }}
-            >
-              &#8592;
-            </span>
+            <span onClick={() => removeItemToCart(item)}>&#8592;</span>
             {item.quantity}
-            <span
-              onClick={() => {
-                addItemToCart(item);
-              }}
-            >
-              {" "}
-              &#8594;{" "}
-            </span>
+            <span onClick={() => addItemToCart(item)}> &#8594; </span>
           </p>
           <p>x</p>
           <p>{item.price}</p>
         </div>
       ))}
 
-      <p>{totalPrice}</p>
+      <span className="Total">Total: {totalPrice}</span>
     </div>
   );
 };
