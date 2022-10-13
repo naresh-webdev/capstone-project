@@ -10,7 +10,7 @@ import { UserProvider } from "./contexts/user.context";
 
 import { ProductProvider } from "./contexts/products.context";
 
-import { CartProvider } from "./contexts/cart-dropdown.context";
+import { CartProvider } from "./contexts/cart.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

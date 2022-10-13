@@ -1,6 +1,6 @@
 import "./product-card.styles.scss";
 import { useContext } from "react";
-import { CartContext } from "../../contexts/cart-dropdown.context";
+import { CartContext } from "../../contexts/cart.context";
 import Button from "../button/button.component";
 
 const ProductCard = ({ product }) => {
