@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
 export const addCartItem = (cartItems, productToAdd) => {
-  console.log(cartItems);
   // find if cartitems contains products to add
   const existingCartItem = cartItems.find(
     (item) => item.id === productToAdd.id
@@ -70,6 +69,14 @@ export const CartProvider = ({ children }) => {
       0
     );
     setCartCountItem(newCartCountItem);
+  }, [CartItems]);
+
+  useEffect(() => {
+    const totalAmount = CartItems.reduce(
+      (acc, cur) => acc + cur.quantity * cur.price,
+      0
+    );
+    setTotalPrice(totalAmount);
   }, [CartItems]);
 
   const value = {
