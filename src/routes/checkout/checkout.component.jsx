@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react";
 import { CartContext } from "../../contexts/cart-dropdown.context";
 
+import CheckoutItem from "../../component/checkout-item/checkout-item.component";
+
 import "./checkout.styles.scss";
 
 const Checkout = () => {
@@ -36,20 +38,11 @@ const Checkout = () => {
           <span>Remove</span>
         </div>
       </div>
-      {CartItems.map((item) => (
-        <div key={item.id}>
-          <img src={item.imageUrl} alt="imageUrl" />;<p>{item.name}</p>
-          <p>
-            <span onClick={() => removeItemToCart(item)}>&#8592;</span>
-            {item.quantity}
-            <span onClick={() => addItemToCart(item)}> &#8594; </span>
-          </p>
-          <p>x</p>
-          <p>{item.price}</p>
-        </div>
+      {CartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
 
-      <span className="Total">Total: {totalPrice}</span>
+      <span className="total">Total: {totalPrice}</span>
     </div>
   );
 };

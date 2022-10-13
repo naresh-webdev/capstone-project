@@ -18,12 +18,16 @@ export const addCartItem = (cartItems, productToAdd) => {
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
-export const removeCartItem = (cartItems, productToRemove) => {
+export const removeCartItem = (
+  cartItems,
+  productToRemove,
+  defaultRemove = false
+) => {
   const existingCartItem = cartItems.find(
     (item) => item.id === productToRemove.id
   );
 
-  if (existingCartItem.quantity === 1) {
+  if (existingCartItem.quantity === 1 || defaultRemove) {
     return cartItems.filter((cartItem) => cartItem.id !== productToRemove.id);
   }
 
@@ -56,8 +60,8 @@ export const CartProvider = ({ children }) => {
     setCartItems(addCartItem(CartItems, productToAdd));
   };
 
-  const removeItemToCart = (productToRemove) => {
-    setCartItems(removeCartItem(CartItems, productToRemove));
+  const removeItemToCart = (productToRemove, defaultRemove = false) => {
+    setCartItems(removeCartItem(CartItems, productToRemove, defaultRemove));
   };
 
   useEffect(() => {
