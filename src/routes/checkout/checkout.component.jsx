@@ -6,14 +6,8 @@ import CheckoutItem from "../../component/checkout-item/checkout-item.component"
 import "./checkout.styles.scss";
 
 const Checkout = () => {
-  const {
-    isCartOpen,
-    setIsCartOpen,
-    CartItems,
-    totalPrice,
-    addItemToCart,
-    removeItemToCart,
-  } = useContext(CartContext);
+  const { isCartOpen, setIsCartOpen, CartItems, totalPrice } =
+    useContext(CartContext);
 
   useEffect(() => {
     if (isCartOpen) setIsCartOpen(false);
