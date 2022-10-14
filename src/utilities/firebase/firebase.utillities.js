@@ -76,6 +76,7 @@ export const getCollectionAndDocuments = async () => {
     acc[title.toLowerCase()] = items;
     return acc;
   }, {});
+
   return categoryMap;
 };
 
