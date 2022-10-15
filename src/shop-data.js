@@ -151,14 +151,16 @@ const SHOP_DATA = [
     items: [
       {
         id: 23,
-        name: "Blue Tanktop",
-        imageUrl: "https://i.ibb.co/7CQVJNm/blue-tank.png",
+        name: "Black Tanktop",
+        imageUrl:
+          "https://pimg.bucklecontent.com/images/products/95740ZT171036S/BLK/f/dd3ce1dfd4801f7e489866be3a4752cav3?quality=0.8&width=845",
         price: 25,
       },
       {
         id: 24,
-        name: "Floral Blouse",
-        imageUrl: "https://i.ibb.co/4W2DGKm/floral-blouse.png",
+        name: "Party Wear",
+        imageUrl:
+          "https://i.etsystatic.com/21102486/r/il/e4ec0d/2191025857/il_500x500.2191025857_lb6f.jpg",
         price: 20,
       },
       {
@@ -187,8 +189,9 @@ const SHOP_DATA = [
       },
       {
         id: 29,
-        name: "White Blouse",
-        imageUrl: "https://i.ibb.co/qBcrsJg/white-vest.png",
+        name: "Women Jeans",
+        imageUrl:
+          "https://i.pinimg.com/236x/ca/15/b0/ca15b0f912440e70e09b40b1f2a2d04a--navy-blue-tops-outfit-winter.jpg",
         price: 20,
       },
     ],
