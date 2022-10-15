@@ -3,7 +3,13 @@ import { CartContext } from "../../contexts/cart.context";
 
 import CheckoutItem from "../../component/checkout-item/checkout-item.component";
 
-import "./checkout.styles.scss";
+import {
+  Container,
+  Header,
+  Block,
+  BlockLastChild,
+  Total,
+} from "./checkout.styles.jsx";
 
 const Checkout = () => {
   const { isCartOpen, setIsCartOpen, CartItems, totalPrice } =
@@ -14,30 +20,30 @@ const Checkout = () => {
   }, []);
 
   return (
-    <div className="checkout-container">
-      <div className="checkout-header">
-        <div className="header-block">
+    <Container>
+      <Header>
+        <Block>
           <span>Product</span>
-        </div>
-        <div className="header-block">
+        </Block>
+        <Block>
           <span>Description</span>
-        </div>
-        <div className="header-block">
+        </Block>
+        <Block>
           <span>Quantity</span>
-        </div>
-        <div className="header-block">
+        </Block>
+        <Block>
           <span>Price</span>
-        </div>
-        <div className="header-block">
+        </Block>
+        <BlockLastChild>
           <span>Remove</span>
-        </div>
-      </div>
+        </BlockLastChild>
+      </Header>
       {CartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
 
-      <span className="total">Total: ${totalPrice}</span>
-    </div>
+      <Total as="span">Total: ${totalPrice}</Total>
+    </Container>
   );
 };
 
