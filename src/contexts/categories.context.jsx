@@ -3,13 +3,12 @@ import { createContext, useState, useEffect } from "react";
 
 import { getCollectionAndDocuments } from "../utilities/firebase/firebase.utillities.js";
 
-export const ProductsContext = createContext({
-  Products: [],
-  setProducts: () => null,
+export const CategoriesContext = createContext({
+  categoriesMap: {},
 });
 
-export const ProductProvider = ({ children }) => {
-  const [Products, setProducts] = useState([]);
+export const CategoriesProvider = ({ children }) => {
+  const [categoriesMap, setCategoriesMap] = useState({});
 
   // useEffect(() => {
   //   addCollectionAndDocuments("categories", SHOP_DATA);
@@ -19,15 +18,16 @@ export const ProductProvider = ({ children }) => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCollectionAndDocuments();
       console.log(categoryMap);
+      setCategoriesMap(categoryMap);
     };
     getCategoriesMap();
   }, []);
 
-  const value = { Products, setProducts };
+  const value = { categoriesMap };
 
   return (
-    <ProductsContext.Provider value={value}>
+    <CategoriesContext.Provider value={value}>
       {children}
-    </ProductsContext.Provider>
+    </CategoriesContext.Provider>
   );
 };
