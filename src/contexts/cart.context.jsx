@@ -51,8 +51,10 @@ export const CartContext = createContext({
 
 export const CART_ACTION_TYPES = {
   IS_CART_OPEN: "IS_CART_OPEN",
+  SET_CART_ITEM: "SET_CART_ITEM",
 };
 
+// ? Reducer function
 const cartReducer = (state, action) => {
   const { type, payload } = action;
 
@@ -61,6 +63,12 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         isCartOpen: payload,
+      };
+
+    case CART_ACTION_TYPES.SET_CART_ITEM:
+      return {
+        ...state,
+        CartItems: payload,
       };
     default:
       throw new Error(`unhadled type ${type} in cartReducers`);
@@ -79,15 +87,26 @@ export const CartProvider = ({ children }) => {
     cartReducer,
     INITIAL_STATE
   );
+  const [{ CartItems }, dispatchSetCartItem] = useReducer(
+    cartReducer,
+    INITIAL_STATE
+  );
 
-  const setIsCartOpen = (user) => {
+  const setIsCartOpen = (booleanValue) => {
     dispatchisCartOpen({
       type: CART_ACTION_TYPES.IS_CART_OPEN,
-      payload: user,
+      payload: booleanValue,
     });
   };
-  // const [isCartOpen, setIsCartOpen] = useState(false);
-  const [CartItems, setCartItems] = useState([]);
+
+  const setCartItems = (cartItems) => {
+    console.log(cartItems);
+    dispatchSetCartItem({
+      type: CART_ACTION_TYPES.SET_CART_ITEM,
+      payload: cartItems,
+    });
+  };
+  // const [CartItems, setCartItems] = useState([]);
   const [cartCountItem, setCartCountItem] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
