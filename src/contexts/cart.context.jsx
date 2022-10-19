@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useReducer } from "react";
 
 export const addCartItem = (cartItems, productToAdd) => {
   // find if cartitems contains products to add
@@ -49,8 +49,44 @@ export const CartContext = createContext({
   totalPrice: 0,
 });
 
+export const CART_ACTION_TYPES = {
+  IS_CART_OPEN: "IS_CART_OPEN",
+};
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case CART_ACTION_TYPES.IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload,
+      };
+    default:
+      throw new Error(`unhadled type ${type} in cartReducers`);
+  }
+};
+
+const INITIAL_STATE = {
+  isCartOpen: false,
+  CartItems: [],
+  cartCountItem: 0,
+  totalPrice: 0,
+};
+
 export const CartProvider = ({ children }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [{ isCartOpen }, dispatchisCartOpen] = useReducer(
+    cartReducer,
+    INITIAL_STATE
+  );
+
+  const setIsCartOpen = (user) => {
+    dispatchisCartOpen({
+      type: CART_ACTION_TYPES.IS_CART_OPEN,
+      payload: user,
+    });
+  };
+  // const [isCartOpen, setIsCartOpen] = useState(false);
   const [CartItems, setCartItems] = useState([]);
   const [cartCountItem, setCartCountItem] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
